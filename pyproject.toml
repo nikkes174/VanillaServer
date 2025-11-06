@@ -1,11 +1,7 @@
 [tool.poetry]
 name = "async_server"
 version = "0.1.0"
-packages = [{ include = "async_server", from = "." }]
-
-[tool.poetry.dependencies]
-python = "^3.12"
-aiohttp = "^3.13.2"
+packages = [{ include = ".", from = "." }]
 
 
 [tool.poetry.group.dev.dependencies]
