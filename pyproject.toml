@@ -1,12 +1,7 @@
 [tool.poetry]
-name = "order"
+name = "async_server"
 version = "0.1.0"
-description = "Система заказов и оплат с SQLAlchemy, тестами и pre-commit хуками"
-packages = [
-    { include = "order_system" },
-    { include = "user" },
-    { include = "product" }
-]
+packages = [{ include = "async_server", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
