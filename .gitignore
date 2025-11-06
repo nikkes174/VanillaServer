@@ -1,0 +1,4 @@
+echo ".venv/" >
+echo "__pycache__/"
+echo ".pytest_cache/"
+echo ".mypy_cache/"
