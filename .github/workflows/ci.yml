@@ -22,6 +22,11 @@ jobs:
         run: |
           pip install poetry
 
+     
+      - name: Clear Poetry cache
+        run: |
+          poetry cache clear pypoetry --all || true
+
       - name: Install dependencies
         run: |
           poetry install
