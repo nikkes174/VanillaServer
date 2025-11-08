@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "async_server"
+version = "0.1.0"
+packages = [{ include = ".", from = "." }]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2"
+pytest-mock = "^3.14"
+black = "^24.8"
+flake8 = "^7.1"
+isort = "^5.13"
+pre-commit = "^3.8"
+pytest-aiohttp = "^1.1.0"
+mypy = "^1.11"
+
+[tool.black]
+line-length = 79
+target-version = ['py312']
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+line_length = 79
+multi_line_output = 3
+include_trailing_comma = true
+combine_as_imports = true
+force_grid_wrap = 0
+known_first_party = ["order_system", "user", "product"]
+skip = ["venv", ".venv", "build", "dist"]
+
+[tool.flake8]
+max-line-length = 79
+exclude = [
+    ".venv",
+    "venv",
+    "__pycache__",
+    "build",
+    "dist",
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    "env",
+    "site-packages"
+]
+extend-ignore = ["E203", "W503"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-v"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

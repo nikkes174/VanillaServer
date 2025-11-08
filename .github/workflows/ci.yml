@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "review-target"
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "review-target"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create false
+
+      - name: Clear Poetry cache
+        run: |
+          poetry cache clear pypoetry --all || true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root
+
+      - name: Lint with flake8
+        run: |
+          poetry run flake8 .
+
+      - name: Run tests
+        run: |
+          poetry run pytest -v --maxfail=1 --disable-warnings
