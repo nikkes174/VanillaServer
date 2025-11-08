@@ -1,4 +1,21 @@
-echo ".venv/" >
-echo "__pycache__/"
-echo ".pytest_cache/"
-echo ".mypy_cache/"
+.venv/
+venv/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+.pytest_cache/
+.mypy_cache/
+
+*.log
+*.tmp
+
+.idea/
+.vscode/
+
+build/
+dist/
+*.egg-info/
