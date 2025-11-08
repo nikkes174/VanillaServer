@@ -3,6 +3,8 @@ name = "async_server"
 version = "0.1.0"
 packages = [{ include = ".", from = "." }]
 
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2"
@@ -12,8 +14,6 @@ flake8 = "^7.1"
 isort = "^5.13"
 pre-commit = "^3.8"
 pytest-aiohttp = "^1.1.0"
-
-
 
 [tool.black]
 line-length = 79
@@ -29,8 +29,6 @@ combine_as_imports = true
 force_grid_wrap = 0
 known_first_party = ["order_system", "user", "product"]
 skip = ["venv", ".venv", "build", "dist"]
-
-
 
 [tool.flake8]
 max-line-length = 79
@@ -48,8 +46,6 @@ exclude = [
 ]
 extend-ignore = ["E203", "W503"]
 
-
-
 [tool.mypy]
 python_version = "3.12"
 ignore_missing_imports = true
@@ -62,19 +58,16 @@ warn_unreachable = true
 check_untyped_defs = false
 explicit_package_bases = true
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-
 [[tool.mypy.overrides]]
 module = "tests.*"
 disallow_untyped_defs = false
 disallow_incomplete_defs = false
 
-
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
 addopts = "-v"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
