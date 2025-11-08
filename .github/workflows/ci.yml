@@ -2,16 +2,25 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "review-target"
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - develop
+      - "review-target"
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,15 +30,15 @@ jobs:
       - name: Install Poetry
         run: |
           pip install poetry
+          poetry config virtualenvs.create false
 
-     
       - name: Clear Poetry cache
         run: |
           poetry cache clear pypoetry --all || true
 
       - name: Install dependencies
         run: |
-          poetry install
+          poetry install --no-interaction --no-root
 
       - name: Lint with flake8
         run: |
@@ -41,4 +50,4 @@ jobs:
 
       - name: Run tests
         run: |
-          poetry run pytest -v
+          poetry run pytest -v --maxfail=1 --disable-warnings
